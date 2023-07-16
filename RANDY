@@ -1,0 +1,373 @@
+<DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+  <title>Random Phrase Generator</title>
+<style>
+  body {
+    font-family: Arial;
+    margin: -80px; /* Add this to remove default margin */
+    padding: 0; /* Add this to remove default padding */
+  }
+  
+
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .container textarea {
+    display: none;
+  }
+
+  .translation {
+    display: none;
+  }
+
+  .element-container {
+    position: relative;
+  }
+
+  .element-container textarea {}
+
+  .element-container button {}
+
+  .original-text-area {
+    display: none;
+  }
+
+  .translated-text-area {
+    display: none;
+  }
+
+button {
+  padding: 5px 20px;
+  font-size: 80px;
+  background: yellow;
+  margin-top: -100px;
+  width: 100%;
+  height: 400px;
+  font-weight: bold;
+  border: 2px solid blue;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+button#repeatButton {
+  background-color: red;
+  color: white;
+  margin-right: 10px;
+  margin-top: -15px;
+  height: 400px;
+  width: 100%;
+  font-weight: bold;
+  border: 2px solid blue;
+    transition: transform 0.3s, background-color 0.3s;
+
+}
+
+button#translationButton {
+  background-color: green;
+  color: white;
+  font-size: 54px;
+  margin-top: -565px;
+  margin-left: 0;
+  margin-right: 10px;
+  height: 400px;
+  width: 100%;
+    transition: transform 0.3s, background-color 0.3s;
+
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+button:active {
+  background-color: lightgray;
+  transform: translateY(4px);
+}
+
+  #originalContainer {
+    margin-bottom: 20px;
+  }
+
+  #translatedContainer {
+    margin-bottom: 20px;
+  }
+
+  #phrases {
+    color: black;
+    display: center;
+    flex-direction: column;
+    margin-top: 400px;
+  }
+
+  @media only screen and (min-width: 320px) and (max-width: 480px) {
+    .element-container {
+      top: 0;
+    }
+
+    #originalContainer,
+    #translatedContainer {
+      display: flex;
+      flex-direction: column;
+    }
+
+    textarea {
+      height: 200px;
+    }
+
+    #translatedContainer textarea {
+      height: 110px;
+      position: relative;
+      text-align: center;
+      margin-top: -30px;
+    }
+  }
+
+  @media only screen and (min-width: 320px) and (max-height: 480px) {
+    .element-container {
+      flex-direction: column;
+    }
+
+    #originalContainer,
+    #translatedContainer {
+      flex-basis: 75%; /* Adjust the percentage as needed */
+    }
+
+    #phrases {
+      flex-basis: 25%; /* Adjust the percentage as needed */
+      margin-top: 0;
+    }
+  }
+  </style>
+</head>
+<body>
+  <div class="element-container">
+    <h1 style="color: red;"></h1>
+  </div>
+
+  <div id="originalContainer" class="container">
+    <textarea id="textArea1" rows="27">I AM
+I WAS
+I WILL BE
+YOU ARE
+YOU WERE
+YOU WILL BE
+HE IS
+HE WAS
+HE WILL BE
+SHE IS
+SHE WAS
+SHE WILL BE
+WE ARE
+WE WERE
+WE WILL BE
+YOU GUYS ARE
+YOU GUYS WERE
+YOU GUYS WILL BE
+YOU GIRLS ARE
+YOU GIRLS WERE
+YOU GIRLS WILL BE
+THEY ARE
+THEY WERE
+THEY WILL BE
+</textarea>
+    <textarea id="textArea2" rows="8">WORKING
+RESTING
+WALKING
+STUDYING
+SPEAKING
+WAITING
+WALKING
+BUYING</textarea>
+    <textarea id="textArea3" rows="14">IN THE HOUSE.
+IN THE OFFICE.
+IN  THE AVENUE.
+IN THE MARKET.
+IN  THE LIBRARY.
+IN  THE PHARMACY.
+AT THE HOSPITAL.
+IN THE MUSEUM.
+IN THE RESTAURANT.
+IN THE BANK.
+IN THE PARK.
+IN  THE STREET.
+IN  THE SHOP.
+IN  THE SCHOOL.
+</textarea>
+  </div>
+  <br><br>
+
+  <div id="translatedContainer" class="container">
+    <h2 style="color: blue;"></h2>
+    <div id="translatedContainer" class="container">
+      <button id="repeatButton" onclick="repeatTranslation()">REPEAT</button>
+      <textarea id="textArea1Translated" rows="28">YO ESTOY
+YO ESTABA
+YO ESTARÉ
+TU ESTÁS
+TU ESTABAS
+TU ESTARÁS
+EL ESTÁ
+EL ESTABA
+EL ESTARÁ
+ELLA ESTÁ
+ELLA ESTABA
+ELLA ESTARÁ
+NOSOTROS ESTAMOS
+NOSOTROS ESTABAMOS
+NOSOTROS ESTAREMOS
+VOSOTROS ESTAÍS
+VOSOTROS ESTABAIS
+VOSOTROS ESTARÉIS
+VOSOTRAS ESTÁIS
+VOSOTRAS ESTABAIS
+VOSOTRAS ESTARÉIS
+ELLOS ESTÁN
+ELLOS ESTABAN
+ELLOS ESTARÁN
+ELLAS ESTÁN
+ELLAS ESTABAN
+ELLAS ESTARÁN</textarea>
+      <textarea id="textArea2Translated" rows="9">TRABAJANDO
+DESCANSANDO
+CAMINANDO
+ESTUDIANDO
+HABLANDO
+ESPERANDO
+CAMINANDO
+COMPRANDO</textarea>
+      <textarea id="textArea3Translated" rows="15">EN LA CASA.
+EN LA OFICINA.
+EN LA AVENIDA.
+EN EL MERCADO.
+EN LA BIBLIOTECA.
+EN LA FARMACIA.
+EN EL HOSPITAL.
+EN EL MUSEO.
+EN EL RESTAURANTE.
+EN EL BANCO.
+EN EL PARQUE.
+EN LA CALLE.
+EN LA TIENDA.
+EN LA ESCUELA.</textarea>
+    </div>
+  </div>
+  <br><br>
+<div class="element-container">
+    <button onclick="displayRandomPhrase()">GO</button>
+    <p> <span id="counter">0</span>.</p>
+  </div>
+  <br><br>
+    <div id="phrases" style="color: green; font-size: 48px;font-weight: bold; font-family: Arial;
+
+"></div>
+  </div>
+
+  <script>
+    let originalTextAreas = ['textArea1', 'textArea2', 'textArea3'];
+    let translatedTextAreas = ['textArea1Translated', 'textArea2Translated', 'textArea3Translated'];
+    let randomIndices = [];
+    let englishSpeechSynthesisUtterance = new SpeechSynthesisUtterance();
+    englishSpeechSynthesisUtterance.lang = 'en-US';
+
+    let spanishSpeechSynthesisUtterance = new SpeechSynthesisUtterance();
+    spanishSpeechSynthesisUtterance.lang = 'es-ES';
+
+    let currentPhrase = '';
+    let buttonCounter = 0;
+    let repeatButton = document.getElementById('repeatButton');
+    let repeatTimeoutId;
+
+    function repeatTranslation() {
+      clearTimeout(repeatTimeoutId);
+      speakEnglishPhrase(currentPhrase);
+      repeatTimeoutId = setTimeout(() => {
+        speakSpanishPhrase(document.querySelector('.translation').textContent.trim());
+      }, 4000);
+    }
+function generateRandomPhrase() {
+  let originalPhrase = generatePhrase(originalTextAreas);
+  let translatedPhrase = generatePhrase(translatedTextAreas);
+  currentPhrase = originalPhrase;
+
+  return `${originalPhrase} <button id="translationButton" onclick="showTranslation(this)">TRANSLATE</button>
+          <div class="translation">${translatedPhrase}</div>`;
+}
+
+    function generatePhrase(textAreas) {
+      let phrase = '';
+
+      for (let i = 0; i < textAreas.length; i++) {
+        let textArea = document.getElementById(textAreas[i]);
+        let words = textArea.value.trim().split('\n');
+        let randomIndex;
+
+        if (randomIndices[i] === undefined) {
+          randomIndices[i] = Math.floor(Math.random() * words.length);
+        }
+
+        randomIndex = randomIndices[i];
+        let randomWord = words[randomIndex];
+
+        if (randomWord) {
+          phrase += randomWord + ' ';
+        }
+      }
+
+      return phrase.trim();
+    }
+
+ function showTranslation(button) {
+ let translationDiv = button.nextElementSibling;
+translationDiv.style.display = 'block'; // Set display to 'block' to show the translation
+translationDiv.style.color = 'red'; // Set the color of the translated phrase to blue
+translationDiv.style.fontSize = '48px'; // Set the font size of the translated phrase to 48 pixels
+translationDiv.style.fontWeight = 'bold'; // Set the translated phrase to bold
+translationDiv.style.fontFamily = 'Arial'; // Set the font family to Arial, sans-serif
+
+  
+  
+  // Text-to-speech - Spanish
+  let translatedPhrase = translationDiv.textContent;
+  speakSpanishPhrase(translatedPhrase);
+
+  // Repeat the audio after a certain delay
+  setTimeout(function() {
+    speakSpanishPhrase(translatedPhrase);
+  }, 3000); // Adjust the delay as needed (in milliseconds)
+}
+
+
+
+    function speakEnglishPhrase(englishPhrase) {
+      englishSpeechSynthesisUtterance.text = englishPhrase;
+      speechSynthesis.speak(englishSpeechSynthesisUtterance);
+    }
+
+    function speakSpanishPhrase(spanishPhrase) {
+      spanishSpeechSynthesisUtterance.text = spanishPhrase;
+      speechSynthesis.speak(spanishSpeechSynthesisUtterance);
+    }
+
+    function displayRandomPhrase() {
+      buttonCounter++; // Increment the counter
+      let phrasesContainer = document.getElementById('phrases');
+      let randomPhrase = generateRandomPhrase();
+      phrasesContainer.innerHTML = randomPhrase;
+
+      // Speak the original phrase in English
+      let englishPhrase = randomPhrase.substring(0, randomPhrase.indexOf('<'));
+      speakEnglishPhrase(englishPhrase);
+
+      // Update the counter value
+      let counterElement = document.getElementById('counter');
+      counterElement.textContent = buttonCounter.toString();
+
+      // Reset randomIndices array
+      randomIndices = [];
+    }
+  </script>
+</body>
+</html>
